@@ -24,11 +24,12 @@ def FreqAnalysis(data, fs, N, N2, sclNum):
 
     else:
         fig = go.Figure()
-        fig.add_trace(go.Scatter(x=freq_vec, y=mag_data,
-                    mode='lines',
-                    name='lines'))
-    
-    
+        for i in range(sclNum):
+            fig.add_trace(go.Scatter(x=freq_vec, y=20*np.log10(mag_data[:,i]),
+                        mode='lines',
+                        name='lines'))
+        fig.show()
+    del fig
     
 
     

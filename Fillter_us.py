@@ -6,8 +6,12 @@ from scipy.signal import firwin, lfilter
 def FIR_us(data,numtaps, fs, lowcut=None, highcut=None):
     a_coef = 1.0
     delay_idx = int((numtaps-1)/2)
-    padding = np.zeros((delay_idx, 64, 64))
-    padding_data = np.concatenate((data, padding), axis=0)
+    if data.ndim == 3:
+        padding = np.zeros((delay_idx, 64, 64))
+        padding_data = np.concatenate((data, padding), axis=0)
+    else:
+        padding = np.zeros((delay_idx, 64))
+        padding_data = np.concatenate((data, padding), axis=0)
 
     if lowcut and highcut:  #Bandpass filter:
         cutoff = [lowcut, highcut]
@@ -28,6 +32,8 @@ def FIR_us(data,numtaps, fs, lowcut=None, highcut=None):
     
     
     filtered_data = lfilter(b_coef,a_coef,padding_data, axis=0)
-    filtered_data = filtered_data[delay_idx:,:,:]
-
+    if data.ndim == 3:
+        filtered_data = filtered_data[delay_idx:,:,:]
+    else:
+        filtered_data = filtered_data[delay_idx:,:]
     return filtered_data

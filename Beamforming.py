@@ -22,5 +22,15 @@ def DAS(data,N,activeNum,sclNum,dist_vec,pitch,fs,c):
     return beamforming_data, summation_data
 
 
-def DMAS():
-    return 0
+def DMAS(data,N,activeNum,sclNum,dist_vec,pitch,fs,c):
+    beamforming_data, _ = DAS(data=data,N=N,activeNum=activeNum,
+    sclNum=sclNum,dist_vec=dist_vec,pitch=pitch,fs=fs,c=c)
+    y_DMAS = np.zeros((N,sclNum))
+
+
+    for i in range(sclNum):
+        for j in range(activeNum-1):
+            for k in range(i+1, activeNum):
+                y_DMAS[:,i] += beamforming_data[:, j,i] * beamforming_data[:, k,i]
+    return y_DMAS
+
