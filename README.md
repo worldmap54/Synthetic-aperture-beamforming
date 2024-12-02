@@ -9,6 +9,6 @@ Beamforming Process
   4) Filtering after applying the beamforming method
   5) Hilbert transform
   6) Log compression
-  7) DAS
+  7) DSC
   8) Display
   
