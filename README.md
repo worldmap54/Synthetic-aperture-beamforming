@@ -7,9 +7,9 @@ Beamforming Process
   1) Load Raw data file(N, Ch., Scanline) from dir.
   2) Pre-filtering for remove noise(DC noise, Low/High freq noise
   3) Beamforming
-3.1) 
-  4) Hilbert transform
-  5) Log compression
-  6) DAS
-  7) Display
+3.1) filtering after adapting beamforming method
+  5) Hilbert transform
+  6) Log compression
+  7) DAS
+  8) Display
   
